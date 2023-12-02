@@ -11,6 +11,6 @@ import com.ativ.pedido.entities.Pedido;
  */
 @Repository
 public interface PedidoRepository extends JpaRepository<Pedido, Integer> {
-    Optional<Pedido> findByItem(String item);
+    Optional<Pedido> findByQuantidade(int quantidade);
 
 }

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ativ.pedido.dto.PedidoDto;
 import com.ativ.pedido.entities.Pedido;
 import com.ativ.pedido.services.PedidoService;
 
@@ -27,13 +28,13 @@ public class PedidoController {
 
     // Comentário: Endpoint para obter a lista de todos os pedidos.
     @GetMapping("/lista")
-    private List<Pedido> lista() {
+    private List<PedidoDto> lista() {
         return service.lista();
     }
 
     // Comentário: Endpoint para cadastrar um novo pedido.
     @PostMapping("/cadastro")
-    private void cadastro(@RequestBody Pedido pedido) {
+    private void cadastro(Pedido pedido) {
         service.salvar(pedido);
     }
 
@@ -51,11 +52,12 @@ public class PedidoController {
 
     // Este método é mapeado para manipular requisições PUT na URL
     // "/alterar/{item}".
-    @PutMapping("/alterar/{item}")
-    private ResponseEntity<String> updatePedidoByItem(@PathVariable String item, @RequestBody Pedido updatePedido) {
+    @PutMapping("/alterar/{quantidade}")
+    private ResponseEntity<String> updatePedidoByQuantidade(@PathVariable int quantidade,
+            @RequestBody Pedido updatePedido) {
 
         // Chama um serviço para tentar atualizar um pedido com base no item fornecido.
-        if (service.updatePedidoByItem(item, updatePedido)) {
+        if (service.updatePedidoByItem(quantidade, updatePedido)) {
 
             // Se a atualização for bem-sucedida, retorna uma resposta HTTP 200 (OK).
             return ResponseEntity.ok("Pedido updated successfully.");

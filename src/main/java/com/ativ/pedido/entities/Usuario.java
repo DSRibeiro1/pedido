@@ -25,11 +25,6 @@ public class Usuario {
     @OneToMany(mappedBy = "usuario")
     private List<Pedido> pedidos;
 
-    // Perguntar se deve adicionar
-    // endereco: Address[];
-    // @OneToMany(mappedBy="usuario")
-    // private List<Endereco> enderecos;
-
     public Usuario() {
 
     }

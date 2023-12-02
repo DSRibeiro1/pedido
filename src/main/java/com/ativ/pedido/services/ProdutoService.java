@@ -1,9 +1,12 @@
 package com.ativ.pedido.services;
 
-import java.util.Optional;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
 import org.springframework.stereotype.Service;
 
+import com.ativ.pedido.dto.ProdutoDto;
 import com.ativ.pedido.entities.Produto;
 import com.ativ.pedido.repository.ProdutoRepository;
 
@@ -17,8 +20,13 @@ public class ProdutoService {
     }
 
     // Comentário: Retorna uma lista de todos os produtos.
-    public List<Produto> lista() {
-        return prodRepository.findAll();
+    public List<ProdutoDto> lista() {
+        return prodRepository.findAll().stream()
+                .map(ProdutoDto::new) // Converte cada usuario em UsuarioDTO
+                .collect(Collectors.toList()); // Coleta os objetos UsuarioDto em uma lista
+
+        // Retorna a lista de UsuarioDto
+
     }
 
     // Comentário: Salva um novo produto no banco de dados.
@@ -37,9 +45,9 @@ public class ProdutoService {
         prodRepository.deleteById(id);
     }
 
-    public boolean updateProdutoByNome(String nome, Produto updateProduto) {
+    public boolean updateProdutoByDescricao(String descricao, Produto updateProduto) {
         // Procura um Produto pelo item na base de dados.
-        Optional<Produto> existingProdutoOptional = prodRepository.findByNome(nome);
+        Optional<Produto> existingProdutoOptional = prodRepository.findByDescricao(descricao);
 
         if (existingProdutoOptional.isPresent()) {
             // Se um Produto com o item fornecido for encontrado, atualiza suas informações.
@@ -49,9 +57,8 @@ public class ProdutoService {
 
             // Atualiza os campos do Produto existente com as informações do Produto
             // atualizado.
-            existingProduto.setNome(updateProduto.getNome());
+
             existingProduto.setDescricao(updateProduto.getDescricao());
-            existingProduto.setPreco(updateProduto.getPreco());
 
             // Salva as alterações na base de dados.
             prodRepository.save(existingProduto);

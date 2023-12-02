@@ -1,14 +1,10 @@
-package com.ativ.pedido.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+package com.ativ.pedido.dto;
 
-@Entity
-public class Endereco {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+import com.ativ.pedido.entities.Endereco;
+
+public class EnderecoDto {
+
     private int id;
     private String rua;
     private String numero;
@@ -16,22 +12,24 @@ public class Endereco {
     private String cep;
     private String cidade;
 
-    // Projeto do Prof. Rodolfo considera ilógico endereco ter vários pedidos
-    // APAGAR:
-    // @JsonIgnore
-    // @OneToMany(mappedBy = "endereco")
-    // private List<Pedido> pedidos;
+    // public EnderecoDto() {
+    // }
 
-    public Endereco() {
-
-    }
-
-    public int getId() {
-        return id;
+    public EnderecoDto(Endereco endereco) {
+        this.id = endereco.getId();
+        this.rua = endereco.getRua();
+        this.numero = endereco.getNumero();
+        this.bairro = endereco.getBairro();
+        this.cep = endereco.getCep();
+        this.cidade = endereco.getCidade();
     }
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getRua() {

@@ -2,7 +2,11 @@ package com.ativ.pedido.services;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+
 import org.springframework.stereotype.Service;
+
+import com.ativ.pedido.dto.EnderecoDto;
 import com.ativ.pedido.entities.Endereco;
 import com.ativ.pedido.repository.EnderecoRepository;
 
@@ -16,8 +20,10 @@ public class EnderecoService {
     }
 
     // Retorna uma lista de todos os endereços cadastrados.
-    public List<Endereco> lista() {
-        return eRepository.findAll();
+    public List<EnderecoDto> lista() {
+        return eRepository.findAll().stream()
+                .map(EnderecoDto::new)
+                .collect(Collectors.toList());
     }
 
     // Salva um novo endereço no banco de dados.

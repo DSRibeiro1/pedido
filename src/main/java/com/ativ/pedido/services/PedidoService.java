@@ -2,9 +2,11 @@ package com.ativ.pedido.services;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
+import com.ativ.pedido.dto.PedidoDto;
 import com.ativ.pedido.entities.Pedido;
 import com.ativ.pedido.repository.PedidoRepository;
 
@@ -26,9 +28,11 @@ public class PedidoService {
 
     // Comentário: Retorna a lista de todos os pedidos armazenados no banco de
     // dados.
-    public List<Pedido> lista() {
+    public List<PedidoDto> lista() {
 
-        return pRepository.findAll();
+        return pRepository.findAll().stream()
+                .map(PedidoDto::new)
+                .collect(Collectors.toList());
     }
 
     // Comentário: Salva o pedido no banco de dados.
@@ -70,9 +74,9 @@ public class PedidoService {
         }
     }
 
-    public boolean updatePedidoByItem(String item, Pedido updatePedido) {
+    public boolean updatePedidoByItem(int quantidade, Pedido updatePedido) {
         // Procura um pedido pelo item na base de dados.
-        Optional<Pedido> existingPedidoOptional = pRepository.findByItem(item);
+        Optional<Pedido> existingPedidoOptional = pRepository.findByQuantidade(quantidade);
 
         if (existingPedidoOptional.isPresent()) {
             // Se um pedido com o item fornecido for encontrado, atualiza suas informações.
@@ -83,7 +87,6 @@ public class PedidoService {
             // Atualiza os campos do pedido existente com as informações do pedido
             // atualizado.
             existingPedido.setData(updatePedido.getData());
-            existingPedido.setItem(updatePedido.getItem());
 
             // Salva as alterações na base de dados.
             pRepository.save(existingPedido);

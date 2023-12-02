@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ativ.pedido.dto.FormaDePagamentoDto;
 import com.ativ.pedido.entities.FormaDePagamento;
 import com.ativ.pedido.services.FormaDePagamentoService;
 
@@ -32,14 +33,14 @@ public class FormaDePagamentoController {
     // Mapeia requisições GET para "/formaDePagamento/lista" e retorna a lista de
     // formas de pagamento.
     @GetMapping("/lista")
-    private List<FormaDePagamento> lista() {
+    private List<FormaDePagamentoDto> lista() {
         return service.lista();
     }
 
     // Mapeia requisições POST para "/formaDePagamento/cadastro" para cadastrar uma
     // nova forma de pagamento.
     @PostMapping("/cadastro")
-    private void cadastro(@RequestBody FormaDePagamento formaDePagamento) {
+    private void cadastro(FormaDePagamento formaDePagamento) {
         service.salvar(formaDePagamento);
     }
 

@@ -8,6 +8,6 @@ import com.ativ.pedido.entities.Produto;
 
 @Repository
 public interface ProdutoRepository extends JpaRepository<Produto, Integer> {
-    Optional<Produto> findByNome(String nome);
+    Optional<Produto> findByDescricao(String descricao);
 
 }

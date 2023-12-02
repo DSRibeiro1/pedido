@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ativ.pedido.dto.ProdutoDto;
 import com.ativ.pedido.entities.Produto;
 import com.ativ.pedido.services.ProdutoService;
 
@@ -31,14 +32,14 @@ public class ProdutoController {
 
     // Mapeia requisições GET para "/produto/lista" e retorna a lista de produtos.
     @GetMapping("/lista")
-    private List<Produto> lista() {
+    private List<ProdutoDto> lista() {
         return service.lista();
     }
 
     // Mapeia requisições POST para "/produto/cadastro" para cadastrar um novo
     // produto.
     @PostMapping("/cadastro")
-    private void cadastro(@RequestBody Produto produto) {
+    private void cadastro(Produto produto) {
         service.salvar(produto);
     }
 
@@ -56,11 +57,12 @@ public class ProdutoController {
         service.excluir(id);
     }
 
-    @PutMapping("/alterar/{nome}")
-    private ResponseEntity<String> updateProdutoByNome(@PathVariable String nome, @RequestBody Produto updateProduto) {
+    @PutMapping("/alterar/{descricao}")
+    private ResponseEntity<String> updateProdutoByDescricao(@PathVariable String descricao,
+            @RequestBody Produto updateProduto) {
 
         // Chama um serviço para tentar atualizar um produto com base no item fornecido.
-        if (service.updateProdutoByNome(nome, updateProduto)) {
+        if (service.updateProdutoByDescricao(descricao, updateProduto)) {
 
             // Se a atualização for bem-sucedida, retorna uma resposta HTTP 200 (OK).
             return ResponseEntity.ok("Produto updated successfully.");

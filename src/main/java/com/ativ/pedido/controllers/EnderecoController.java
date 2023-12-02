@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ativ.pedido.dto.EnderecoDto;
 import com.ativ.pedido.entities.Endereco;
 import com.ativ.pedido.services.EnderecoService;
 
@@ -31,14 +32,14 @@ public class EnderecoController {
 
     // Mapeia requisições GET para "/endereco/lista" e retorna a lista de endereços.
     @GetMapping("/lista")
-    private List<Endereco> lista() {
+    private List<EnderecoDto> lista() {
         return service.lista();
     }
 
     // Mapeia requisições POST para "/endereco/cadastro" para cadastrar um novo
     // endereço.
     @PostMapping("/cadastro")
-    private void cadastro(@RequestBody Endereco endereco) {
+    private void cadastro(Endereco endereco) {
         service.salvar(endereco);
     }
 

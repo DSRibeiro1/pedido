@@ -2,9 +2,11 @@ package com.ativ.pedido.services;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
+import com.ativ.pedido.dto.FormaDePagamentoDto;
 import com.ativ.pedido.entities.FormaDePagamento;
 import com.ativ.pedido.repository.FormaDePagamentoRepository;
 
@@ -23,8 +25,10 @@ public class FormaDePagamentoService {
     }
 
     // Comentário: Retorna uma lista de todas as formas de pagamento cadastradas.
-    public List<FormaDePagamento> lista() {
-        return fRepository.findAll();
+    public List<FormaDePagamentoDto> lista() {
+        return fRepository.findAll().stream()
+                .map(FormaDePagamentoDto::new)
+                .collect(Collectors.toList());
     }
 
     // Comentário: Salva uma nova forma de pagamento no sistema.

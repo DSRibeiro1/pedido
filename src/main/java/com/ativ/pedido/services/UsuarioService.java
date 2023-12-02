@@ -4,11 +4,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.ativ.pedido.dto.UsuarioDto;
-import com.ativ.pedido.dto.UsuarioLoginDto;
 import com.ativ.pedido.entities.Usuario;
 import com.ativ.pedido.repository.UsuarioRepository;
 
@@ -65,32 +63,6 @@ public class UsuarioService {
         // com o ID fornecido.
         uRepository.deleteById(id);
 
-    }
-
-    public ResponseEntity<String> autentica(UsuarioLoginDto usuario) {
-        // Obtém todos os usuários do repositório e cria um fluxo (stream) de usuários.
-        if (uRepository.findAll().stream()
-                // Verifica se pelo menos um usuário atende a estas condições:
-                .anyMatch(usuarioLoginDto ->
-                // 1. Verifica se o nome de usuário do usuário no repositório é igual ao nome de
-                // usuário fornecido.
-                usuarioLoginDto.getUsername().equals(usuario.getUsername())
-                        // 2. Verifica se a senha fornecida corresponde à senha armazenada no usuário no
-                        // repositório
-
-                        // && passwordEncoder.matches(usuario.getSenha(), usuarioLoginDto.getSenha())))
-                        // {
-
-                        && usuarioLoginDto.getSenha().equals(usuario.getSenha()))) {
-
-            // Se pelo menos um usuário corresponde às condições, retorna uma resposta de
-            // "Login Válido".
-            return ResponseEntity.ok("Login Válido");
-        } else {
-            // Se nenhum usuário corresponde às condições, retorna uma resposta de "Login
-            // Inválido".
-            return ResponseEntity.badRequest().body("Login Inválido");
-        }
     }
 
     public boolean updateUsuarioByName(String nome, Usuario updateUsuario) {

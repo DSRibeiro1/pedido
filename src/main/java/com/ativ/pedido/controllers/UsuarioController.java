@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ativ.pedido.dto.UsuarioDto;
-import com.ativ.pedido.dto.UsuarioLoginDto;
 import com.ativ.pedido.entities.Usuario;
 import com.ativ.pedido.services.UsuarioService;
 
@@ -41,7 +40,7 @@ public class UsuarioController {
     // Mapeia requisições POST para "/usuario/cadastro" para cadastrar um novo
     // usuário.
     @PostMapping("/cadastro")
-    private void cadastro(@RequestBody Usuario usuario) {
+    private void cadastro(Usuario usuario) {
         service.salvar(usuario);
         System.out.println("Recebido usuário: " + usuario);
 
@@ -51,34 +50,6 @@ public class UsuarioController {
     // solicitações GET para buscar um usuário por ID.
     @GetMapping("/busca/{id}")
     private UsuarioDto busca(@PathVariable int id) {// , @AuthenticationPrincipal OidcUser principal) {
-
-        /*
-         * Comentário: O método @GetMapping mapeia solicitações GET para este método e
-         * usa a variável de caminho
-         * 
-         * @PathVariable para extrair o valor da parte da URL correspondente ao "{id}" e
-         * passá-lo como argumento para o método.
-         */
-
-        /*
-         * Comentário: O parâmetro @AuthenticationPrincipal OidcUser principal é usado
-         * para acessar informações do principal autenticado, que é o usuário
-         * autenticado na solicitação.
-         */
-        // String email = principal.getAttribute("email");
-        // String nome = principal.getAttribute("name");
-
-        /*
-         * Comentário: Imprime o email e o nome do usuário autenticado para fins de
-         * depuração ou registro.
-         */
-        // System.out.println("Email: " + email + ", Nome: " + nome);
-
-        /*
-         * Comentário: Chama o método busca(id) do serviço (presumivelmente injetado
-         * neste controlador) para recuperar as informações do usuário com o ID
-         * fornecido.
-         */
 
         return service.busca(id);
 
@@ -90,10 +61,10 @@ public class UsuarioController {
     }
 
     // Davi --> username: davi.ribeiro / senha 123
-    @PostMapping("/login")
-    private ResponseEntity<String> login(@RequestBody UsuarioLoginDto usuario) {
-        return service.autentica(usuario);
-    }
+    // @PostMapping("/login")
+    // private ResponseEntity<String> login(@RequestBody UsuarioLoginDto usuario) {
+    // return service.autentica(usuario);
+    // }
 
     // Este método é mapeado para manipular requisições PUT na URL
     // "/alterar/{nome}".
