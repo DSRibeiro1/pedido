@@ -52,7 +52,7 @@ public class UsuarioService {
         // return dto;
 
         // Objeto usuario irá armazenar um ID encontrado no Repositório
-        Usuario usuario = uRepository.findById(id).orElse(null);
+        Usuario usuario = uRepository.findById(id).orElse(new Usuario());
 
         // Retorne um objeto UsuarioDto criado a partir de usuario se usuario não for
         // null, caso contrário, retorne null

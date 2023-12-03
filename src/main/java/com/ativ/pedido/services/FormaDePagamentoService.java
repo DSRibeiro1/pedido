@@ -45,7 +45,7 @@ public class FormaDePagamentoService {
         // return fRepository.findById(id).orElse(new FormaDePagamento());
 
         // Objeto FormaDePagamento irá armazenar um ID encontrado no Repositório
-        FormaDePagamento formaDePagamento = fRepository.findById(id).orElse(null);
+        FormaDePagamento formaDePagamento = fRepository.findById(id).orElse(new FormaDePagamento());
 
         // Retorne um objeto FormaDePagamentoDto criado a partir de FormaDePagamento se
         // FormaDePagamento não for null, caso contrário, retorne null

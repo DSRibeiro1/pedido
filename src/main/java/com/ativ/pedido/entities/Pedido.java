@@ -46,6 +46,14 @@ public class Pedido {
 
     }
 
+    public Pedido(Date data, int quantidade, Usuario usuario, FormaDePagamento formaDePagamento, Endereco endereco) {
+        this.data = data;
+        this.quantidade = quantidade;
+        this.usuario = usuario;
+        this.formaDePagamento = formaDePagamento;
+        this.endereco = endereco;
+    }
+
     public int getId() {
         return id;
     }
@@ -96,6 +104,19 @@ public class Pedido {
 
     @Override
     public String toString() {
-        return "id: " + id + ", data: " + data + ", quantidade: " + quantidade;
+        StringBuilder builder = new StringBuilder();
+        builder.append("\nCódigo do pedido: nº").append(id)
+                .append("\nData pedido: ").append(data)
+                .append("\nQuantidade pedido: ").append(quantidade)
+                .append("\nUsuario: ").append(usuario.getNome()).append("\n")
+                .append("\nEndereco ").append("\n")
+                .append("\n Rua: ").append(endereco.getRua())
+                .append("\n Nº: ").append(endereco.getNumero())
+                .append("\n Bairro: ").append(endereco.getBairro())
+                .append("\n Cidade: ").append(endereco.getCidade())
+                .append("\n CEP: ").append(endereco.getCep()).append("\n")
+                .append("\nTipo de pagamento: ").append(formaDePagamento.getTipo());
+
+        return builder.toString();
     }
 }

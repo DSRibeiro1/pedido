@@ -39,7 +39,7 @@ public class EnderecoService {
     public EnderecoDto busca(int id) {
         // return eRepository.findById(id).orElse(new Endereco());
 
-        Endereco endereco = eRepository.findById(id).orElse(null);
+        Endereco endereco = eRepository.findById(id).orElse(new Endereco());
 
         // Retorne um objeto EndereçoDto criado a partir de Endereço se Endereço não for
         // null, caso contrário, retorne null
