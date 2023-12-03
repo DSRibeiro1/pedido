@@ -1,6 +1,6 @@
 package com.ativ.pedido.entities;
 
-import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -18,7 +18,7 @@ public class Pedido {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private Date data;
+    private LocalDate data;
     private int quantidade;
 
     @ManyToOne(cascade = CascadeType.REFRESH)
@@ -46,7 +46,8 @@ public class Pedido {
 
     }
 
-    public Pedido(Date data, int quantidade, Usuario usuario, FormaDePagamento formaDePagamento, Endereco endereco) {
+    public Pedido(LocalDate data, int quantidade, Usuario usuario, FormaDePagamento formaDePagamento,
+            Endereco endereco) {
         this.data = data;
         this.quantidade = quantidade;
         this.usuario = usuario;
@@ -62,11 +63,11 @@ public class Pedido {
         this.id = id;
     }
 
-    public Date getData() {
+    public LocalDate getData() {
         return data;
     }
 
-    public void setData(Date data) {
+    public void setData(LocalDate data) {
         this.data = data;
     }
 
@@ -106,8 +107,8 @@ public class Pedido {
     public String toString() {
         StringBuilder builder = new StringBuilder();
         builder.append("\nCódigo do pedido: nº").append(id)
-                .append("\nData pedido: ").append(data)
-                .append("\nQuantidade pedido: ").append(quantidade)
+                .append("\nData do pedido: ").append(data)
+                .append("\nQuantidade do pedido: ").append(quantidade)
                 .append("\nUsuario: ").append(usuario.getNome()).append("\n")
                 .append("\nEndereco ").append("\n")
                 .append("\n Rua: ").append(endereco.getRua())
