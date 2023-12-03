@@ -36,10 +36,27 @@ public class PedidoService {
     }
 
     // Comentário: Salva o pedido no banco de dados.
-    public void salvar(Pedido pedido) {
+
+    public void salvar(Pedido pedido, String emailUsuarioLogado) {
         // Adicione logs para verificar os dados antes de salvar
+
         System.out.println("Dados do Pedido recebidos: " + pedido);
+
+        // Salva o pedido no banco de dados
         pRepository.save(pedido);
+
+        // Envio de e-mail ao usuário logado
+        String assunto = "Pedido Cadastrado";
+        String mensagem = "O seu pedido foi cadastrado com sucesso!\nDetalhes do Pedido:\n" + pedido.toString();
+
+        try {
+            emailService.sendEmail(emailUsuarioLogado, assunto, mensagem);
+        } catch (Exception e) {
+            // Tratar exceções aqui (registre logs, notifique administradores, etc.)
+            e.printStackTrace();
+        } // Adicione logs para verificar os dados antes de salvar
+        System.out.println("Dados do Pedido recebidos: " + pedido);
+
     }
 
     // Busca um Pedido pelo ID e retorna o pedido encontrado, ou null se não
@@ -57,21 +74,6 @@ public class PedidoService {
 
     public void excluir(int id) {
         pRepository.deleteById(id);
-    }
-
-    public void finalizarPedido(Pedido pedido, String emailUsuarioLogado) {
-        try {
-            // Lógica para finalizar o pedido...
-
-            // Envio de e-mail ao usuário logado
-            String assunto = "Pedido Finalizado";
-            String mensagem = "O seu pedido foi finalizado com sucesso!\nDetalhes do Pedido:\n" + pedido.toString();
-
-            emailService.sendEmail(emailUsuarioLogado, assunto, mensagem);
-        } catch (Exception e) {
-            // Tratar exceções aqui (registre logs, notifique administradores, etc.)
-            e.printStackTrace();
-        }
     }
 
     public boolean updatePedidoByItem(int quantidade, Pedido updatePedido) {
