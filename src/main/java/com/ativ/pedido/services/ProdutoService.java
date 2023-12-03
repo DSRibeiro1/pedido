@@ -23,10 +23,10 @@ public class ProdutoService {
     public List<ProdutoDto> lista() {
         return prodRepository.findAll()
                 .stream()
-                .map(ProdutoDto::new) // Converte cada usuario em UsuarioDTO
-                .collect(Collectors.toList()); // Coleta os objetos UsuarioDto em uma lista
+                .map(ProdutoDto::new) // Converte cada Produto em ProdutoDTO
+                .collect(Collectors.toList()); // Coleta os objetos ProdutoDto em uma lista
 
-        // Retorna a lista de UsuarioDto
+        // Retorna a lista de ProdutoDto
 
     }
 

@@ -93,4 +93,9 @@ public class Pedido {
     public void setQuantidade(int quantidade) {
         this.quantidade = quantidade;
     }
+
+    @Override
+    public String toString() {
+        return "id: " + id + ", data: " + data + ", quantidade: " + quantidade;
+    }
 }

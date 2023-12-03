@@ -9,9 +9,6 @@ public class PedidoDto {
     private Date data;
     private int quantidade;
 
-    // public EnderecoDto() {
-    // }
-
     public PedidoDto(Pedido pedido) {
         this.id = pedido.getId();
         this.data = pedido.getData();
