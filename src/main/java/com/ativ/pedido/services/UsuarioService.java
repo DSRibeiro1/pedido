@@ -28,7 +28,8 @@ public class UsuarioService {
     public List<UsuarioDto> lista() {
         // uRepository.findAll().stream() --> Obtém todos os usuários do repositório,
         // converte para UsuarioDto e coleta em uma lista.
-        return uRepository.findAll().stream()
+        return uRepository.findAll()
+                .stream()
                 .map(UsuarioDto::new) // Converte cada usuario em UsuarioDTO
                 .collect(Collectors.toList()); // Coleta os objetos UsuarioDto em uma lista
 

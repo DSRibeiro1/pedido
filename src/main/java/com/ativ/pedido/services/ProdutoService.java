@@ -21,7 +21,8 @@ public class ProdutoService {
 
     // Comentário: Retorna uma lista de todos os produtos.
     public List<ProdutoDto> lista() {
-        return prodRepository.findAll().stream()
+        return prodRepository.findAll()
+                .stream()
                 .map(ProdutoDto::new) // Converte cada usuario em UsuarioDTO
                 .collect(Collectors.toList()); // Coleta os objetos UsuarioDto em uma lista
 
@@ -36,8 +37,11 @@ public class ProdutoService {
 
     // Comentário: Busca um produto pelo ID. Retorna um Produto ou um novo Produto
     // se não encontrado.
-    public Produto busca(Integer id) {
-        return prodRepository.findById(id).orElse(new Produto());
+    public ProdutoDto busca(Integer id) {
+        // return prodRepository.findById(id).orElse(new Produto());
+        Produto produto = prodRepository.findById(id).orElse(new Produto());
+
+        return produto != null ? new ProdutoDto(produto) : null;
     }
 
     // Comentário: Exclui um produto pelo ID.

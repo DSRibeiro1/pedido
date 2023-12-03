@@ -30,7 +30,8 @@ public class PedidoService {
     // dados.
     public List<PedidoDto> lista() {
 
-        return pRepository.findAll().stream()
+        return pRepository.findAll()
+                .stream()
                 .map(PedidoDto::new)
                 .collect(Collectors.toList());
     }
@@ -62,14 +63,13 @@ public class PedidoService {
     // Busca um Pedido pelo ID e retorna o pedido encontrado, ou null se não
     // existir.
 
-    public Pedido busca(int id) {
-        return pRepository.findById(id).orElse((new Pedido()));
+    public PedidoDto busca(int id) {
+        // return pRepository.findById(id).orElse((new Pedido()));
 
-        // uso de null não é recomendado
-        // return pRepository.findById(id).orElse((null()));
+        Pedido pedido = pRepository.findById(id).orElse(new Pedido());
 
-        // Optional<Pedido> optionalPedido = pRepository.findById(id);
-        // return optionalPedido.orElse(null);
+        return pedido != null ? new PedidoDto(pedido) : null;
+
     }
 
     public void excluir(int id) {

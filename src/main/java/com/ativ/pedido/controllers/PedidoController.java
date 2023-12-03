@@ -41,7 +41,7 @@ public class PedidoController {
 
     // Comentário: Endpoint para buscar um pedido pelo ID.
     @GetMapping("/busca/{id}")
-    private Pedido busca(@PathVariable int id) {
+    private PedidoDto busca(@PathVariable int id) {
         return service.busca(id);
     }
 

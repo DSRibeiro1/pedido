@@ -14,8 +14,8 @@ import com.ativ.pedido.repository.FormaDePagamentoRepository;
 public class FormaDePagamentoService {
 
     // Comentário: O repositório `FormaDePagamentoRepository` é injetado no serviço
-    // para permitir a interação
-    // com as formas de pagamento armazenadas no banco de dados.
+    // para permitir a interação com as formas de pagamento armazenadas no banco de
+    // dados.
     private final FormaDePagamentoRepository fRepository;
 
     // Comentário: Construtor que injeta o repositório necessário para interagir com
@@ -26,7 +26,8 @@ public class FormaDePagamentoService {
 
     // Comentário: Retorna uma lista de todas as formas de pagamento cadastradas.
     public List<FormaDePagamentoDto> lista() {
-        return fRepository.findAll().stream()
+        return fRepository.findAll()
+                .stream()
                 .map(FormaDePagamentoDto::new)
                 .collect(Collectors.toList());
     }
@@ -40,13 +41,15 @@ public class FormaDePagamentoService {
      * Busca Forma De Pagamento pelo ID e retorna Forma De Pagamento encontrado, ou
      * null se não existir.
      */
-    public FormaDePagamento busca(int id) {
-        return fRepository.findById(id).orElse(new FormaDePagamento());
-        // (null) --> null não é recomendado
+    public FormaDePagamentoDto busca(int id) {
+        // return fRepository.findById(id).orElse(new FormaDePagamento());
 
-        // Optional<FormaDePagamento> optionalFormaDePagamento =
-        // fRepository.findById(id);
-        // return optionalFormaDePagamento.orElse(null);
+        // Objeto FormaDePagamento irá armazenar um ID encontrado no Repositório
+        FormaDePagamento formaDePagamento = fRepository.findById(id).orElse(null);
+
+        // Retorne um objeto FormaDePagamentoDto criado a partir de FormaDePagamento se
+        // FormaDePagamento não for null, caso contrário, retorne null
+        return formaDePagamento != null ? new FormaDePagamentoDto(formaDePagamento) : null;
     }
 
     public void excluir(int id) {

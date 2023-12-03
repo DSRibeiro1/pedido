@@ -21,7 +21,8 @@ public class EnderecoService {
 
     // Retorna uma lista de todos os endereços cadastrados.
     public List<EnderecoDto> lista() {
-        return eRepository.findAll().stream()
+        return eRepository.findAll()
+                .stream()
                 .map(EnderecoDto::new)
                 .collect(Collectors.toList());
     }
@@ -35,14 +36,14 @@ public class EnderecoService {
      * Busca um endereço pelo ID e retorna o endereço encontrado, ou null se não
      * existir.
      */
-    public Endereco busca(int id) {
-        return eRepository.findById(id).orElse(new Endereco());
-        // (null) --> null não é recomendado
+    public EnderecoDto busca(int id) {
+        // return eRepository.findById(id).orElse(new Endereco());
 
-        /*
-         * Optional<Endereco> optionalEndereco = eRepository.findById(id);
-         * * return optionalEndereco.orElse(null);
-         */
+        Endereco endereco = eRepository.findById(id).orElse(null);
+
+        // Retorne um objeto EndereçoDto criado a partir de Endereço se Endereço não for
+        // null, caso contrário, retorne null
+        return endereco != null ? new EnderecoDto(endereco) : null;
     }
 
     // Exclui um endereço com base no ID fornecido.

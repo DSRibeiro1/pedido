@@ -47,7 +47,7 @@ public class FormaDePagamentoController {
     // Mapeia requisições GET para "/formaDePagamento/busca/{id}" e retorna a forma
     // de pagamento com o ID fornecido.
     @GetMapping("/busca/{id}")
-    private FormaDePagamento busca(@PathVariable int id) {
+    private FormaDePagamentoDto busca(@PathVariable int id) {
         return service.busca(id);
     }
 

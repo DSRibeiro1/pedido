@@ -46,7 +46,7 @@ public class EnderecoController {
     // Mapeia requisições GET para "/endereco/busca/{id}" e retorna o endereço com o
     // ID fornecido.
     @GetMapping("/busca/{id}")
-    private Endereco busca(@PathVariable int id) {
+    private EnderecoDto busca(@PathVariable int id) {
         return service.busca(id);
     }
 

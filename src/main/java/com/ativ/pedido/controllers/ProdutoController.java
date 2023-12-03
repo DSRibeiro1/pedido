@@ -46,7 +46,7 @@ public class ProdutoController {
     // Mapeia requisições GET para "/produto/busca/{id}" e retorna o produto com o
     // ID fornecido.
     @GetMapping("/busca/{id}")
-    private Produto busca(@PathVariable int id) {
+    private ProdutoDto busca(@PathVariable int id) {
         return service.busca(id);
     }
 

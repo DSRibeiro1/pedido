@@ -12,9 +12,6 @@ public class EnderecoDto {
     private String cep;
     private String cidade;
 
-    // public EnderecoDto() {
-    // }
-
     public EnderecoDto(Endereco endereco) {
         this.id = endereco.getId();
         this.rua = endereco.getRua();
