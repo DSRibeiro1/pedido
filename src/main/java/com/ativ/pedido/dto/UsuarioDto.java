@@ -2,18 +2,33 @@ package com.ativ.pedido.dto;
 
 import com.ativ.pedido.entities.Usuario;
 
+// Esta classe representa um Objeto de Transferência de Dados (DTO) para a entidade Usuario.
 public class UsuarioDto {
 
-    private int id;
-    private String nome;
-    private String username;
-    private String email;
-    private String cpf;
+    // Identificador único para o UsuarioDto.
+    private final int id;
 
-    // public UsuarioDto() {
-    // }
+    // Nome do usuário.
+    private final String nome;
 
+    // Nome de usuário utilizado para login.
+    private final String username;
+
+    // Endereço de e-mail associado ao usuário.
+    private final String email;
+
+    // Número do CPF do usuário.
+    private final String cpf;
+
+    // Construtor que recebe uma entidade Usuario e inicializa o DTO com seus dados.
     public UsuarioDto(Usuario usuario) {
+        if (usuario == null) {
+            throw new IllegalArgumentException("Usuario não pode ser nulo");
+        }
+        if (usuario.getNome() == null || usuario.getUsername() == null || usuario.getEmail() == null
+                || usuario.getCpf() == null) {
+            throw new IllegalArgumentException("Campos críticos do endereço não podem ser nulos");
+        }
         this.id = usuario.getId();
         this.nome = usuario.getNome();
         this.username = usuario.getUsername();
@@ -21,43 +36,29 @@ public class UsuarioDto {
         this.cpf = usuario.getCpf();
     }
 
+    // Método getter para recuperar o id do UsuarioDto.
     public int getId() {
-        return id;
+        return this.id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
+    // Método getter para recuperar o nome do UsuarioDto.
     public String getNome() {
-        return nome;
+        return this.nome;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
+    // Método getter para recuperar o nome de usuário do UsuarioDto.
     public String getUsername() {
-        return username;
+        return this.username;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
+    // Método getter para recuperar o e-mail do UsuarioDto.
     public String getEmail() {
-        return email;
+        return this.email;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
+    // Método getter para recuperar o CPF do UsuarioDto.
     public String getCpf() {
         return cpf;
     }
 
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
 }

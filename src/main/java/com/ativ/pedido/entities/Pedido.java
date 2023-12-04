@@ -15,25 +15,36 @@ import jakarta.persistence.OneToMany;
 
 @Entity
 public class Pedido {
+    // Identificador único do pedido
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    // Data em que o pedido foi realizado
     private LocalDate data;
+
+    // Quantidade de produtos no pedido
     private int quantidade;
 
+    // Usuário associado ao pedido
     @ManyToOne(cascade = CascadeType.REFRESH)
     private Usuario usuario;
 
+    // Forma de pagamento escolhida para o pedido
     @ManyToOne(cascade = CascadeType.REFRESH)
     private FormaDePagamento formaDePagamento;
 
+    // Endereço de entrega do pedido
     @ManyToOne(cascade = CascadeType.REFRESH)
     private Endereco endereco;
 
+    // Lista de produtos incluídos no pedido, com anotação para ignorar na
+    // serialização JSON
     @JsonIgnore
     @OneToMany(mappedBy = "pedido")
     private List<Produto> produtos;
 
+    // Métodos de acesso para a lista de produtos
     public List<Produto> getProdutos() {
         return produtos;
     }
@@ -42,10 +53,12 @@ public class Pedido {
         this.produtos = produtos;
     }
 
+    // Construtor padrão
     public Pedido() {
 
     }
 
+    // Construtor para criar um pedido com informações iniciais
     public Pedido(LocalDate data, int quantidade, Usuario usuario, FormaDePagamento formaDePagamento,
             Endereco endereco) {
         this.data = data;
@@ -55,6 +68,7 @@ public class Pedido {
         this.endereco = endereco;
     }
 
+    // Métodos de acesso para o ID do pedido
     public int getId() {
         return id;
     }
@@ -63,6 +77,7 @@ public class Pedido {
         this.id = id;
     }
 
+    // Métodos de acesso para a data do pedido
     public LocalDate getData() {
         return data;
     }
@@ -71,6 +86,7 @@ public class Pedido {
         this.data = data;
     }
 
+    // Métodos de acesso para o usuário associado ao pedido
     public Usuario getUsuario() {
         return usuario;
     }
@@ -79,6 +95,7 @@ public class Pedido {
         this.usuario = usuario;
     }
 
+    // Métodos de acesso para a forma de pagamento do pedido
     public FormaDePagamento getFormaDePagamento() {
         return formaDePagamento;
     }
@@ -87,6 +104,7 @@ public class Pedido {
         this.formaDePagamento = formaDePagamento;
     }
 
+    // Métodos de acesso para o endereço de entrega do pedido
     public Endereco getEndereco() {
         return endereco;
     }
@@ -95,6 +113,7 @@ public class Pedido {
         this.endereco = endereco;
     }
 
+    // Métodos de acesso para a quantidade de produtos no pedido
     public int getQuantidade() {
         return quantidade;
     }
@@ -103,6 +122,8 @@ public class Pedido {
         this.quantidade = quantidade;
     }
 
+    // Método toString para fornecer uma representação legível em string do objeto
+    // Pedido
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();

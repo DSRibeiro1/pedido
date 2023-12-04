@@ -4,32 +4,27 @@ import com.ativ.pedido.entities.FormaDePagamento;
 
 public class FormaDePagamentoDto {
 
-    private int id;
-    private String tipo;
+    private final int id;
+    private final String tipo;
 
-    // public UsuarioDto() {
-    // }
-
+    // Construtor que aceita uma instância de FormaDePagamento para inicializar o
+    // DTO
     public FormaDePagamentoDto(FormaDePagamento formaDePagamento) {
+        if (formaDePagamento == null) {
+            throw new IllegalArgumentException("Forma pgto não pode ser nulo");
+        }
         this.id = formaDePagamento.getId();
         this.tipo = formaDePagamento.getTipo();
-
     }
 
+    // Método de acesso para obter o ID
     public int getId() {
-        return id;
+        return this.id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
+    // Método de acesso para obter o tipo de forma de pagamento
     public String getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
+        return this.tipo;
     }
 
 }

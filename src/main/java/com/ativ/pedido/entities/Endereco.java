@@ -7,25 +7,32 @@ import jakarta.persistence.Id;
 
 @Entity
 public class Endereco {
+    // Identificador único do endereço
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    // Nome da rua
     private String rua;
+
+    // Número do endereço
     private String numero;
+
+    // Nome do bairro
     private String bairro;
+
+    // CEP do endereço
     private String cep;
+
+    // Nome da cidade
     private String cidade;
 
-    // Projeto do Prof. Rodolfo considera ilógico endereco ter vários pedidos
-    // APAGAR:
-    // @JsonIgnore
-    // @OneToMany(mappedBy = "endereco")
-    // private List<Pedido> pedidos;
-
+    // Construtor padrão
     public Endereco() {
 
     }
 
+    // Métodos de acesso para o ID do endereço
     public int getId() {
         return id;
     }
@@ -34,6 +41,7 @@ public class Endereco {
         this.id = id;
     }
 
+    // Métodos de acesso para o nome da rua
     public String getRua() {
         return rua;
     }
@@ -42,6 +50,7 @@ public class Endereco {
         this.rua = rua;
     }
 
+    // Métodos de acesso para o número do endereço
     public String getNumero() {
         return numero;
     }
@@ -50,6 +59,7 @@ public class Endereco {
         this.numero = numero;
     }
 
+    // Métodos de acesso para o nome do bairro
     public String getBairro() {
         return bairro;
     }
@@ -58,6 +68,7 @@ public class Endereco {
         this.bairro = bairro;
     }
 
+    // Métodos de acesso para o CEP do endereço
     public String getCep() {
         return cep;
     }
@@ -66,6 +77,7 @@ public class Endereco {
         this.cep = cep;
     }
 
+    // Métodos de acesso para o nome da cidade
     public String getCidade() {
         return cidade;
     }

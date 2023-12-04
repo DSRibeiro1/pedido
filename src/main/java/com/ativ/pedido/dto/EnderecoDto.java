@@ -1,18 +1,23 @@
-
 package com.ativ.pedido.dto;
 
 import com.ativ.pedido.entities.Endereco;
 
 public class EnderecoDto {
+    private final int id;
+    private final String rua;
+    private final String numero;
+    private final String bairro;
+    private final String cep;
+    private final String cidade;
 
-    private int id;
-    private String rua;
-    private String numero;
-    private String bairro;
-    private String cep;
-    private String cidade;
-
+    // Construtor que aceita uma instância de Endereco para inicializar o DTO
     public EnderecoDto(Endereco endereco) {
+        if (endereco == null) {
+            throw new IllegalArgumentException("Endereço não pode ser nulo");
+        }
+        if (endereco.getRua() == null || endereco.getNumero() == null || endereco.getCep() == null) {
+            throw new IllegalArgumentException("Campos críticos do endereço não podem ser nulos");
+        }
         this.id = endereco.getId();
         this.rua = endereco.getRua();
         this.numero = endereco.getNumero();
@@ -21,51 +26,33 @@ public class EnderecoDto {
         this.cidade = endereco.getCidade();
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
+    // Método de acesso para obter o ID
     public int getId() {
-        return id;
+        return this.id;
     }
 
+    // Método de acesso para obter a rua
     public String getRua() {
-        return rua;
+        return this.rua;
     }
 
-    public void setRua(String rua) {
-        this.rua = rua;
-    }
-
+    // Método de acesso para obter o número
     public String getNumero() {
-        return numero;
+        return this.numero;
     }
 
-    public void setNumero(String numero) {
-        this.numero = numero;
-    }
-
+    // Método de acesso para obter o bairro
     public String getBairro() {
-        return bairro;
+        return this.bairro;
     }
 
-    public void setBairro(String bairro) {
-        this.bairro = bairro;
-    }
-
+    // Método de acesso para obter o CEP
     public String getCep() {
-        return cep;
+        return this.cep;
     }
 
-    public void setCep(String cep) {
-        this.cep = cep;
-    }
-
+    // Método de acesso para obter a cidade
     public String getCidade() {
-        return cidade;
-    }
-
-    public void setCidade(String cidade) {
-        this.cidade = cidade;
+        return this.cidade;
     }
 }
