@@ -58,16 +58,6 @@ public class Pedido {
 
     }
 
-    // Construtor para criar um pedido com informações iniciais
-    public Pedido(LocalDate data, int quantidade, Usuario usuario, FormaDePagamento formaDePagamento,
-            Endereco endereco) {
-        this.data = data;
-        this.quantidade = quantidade;
-        this.usuario = usuario;
-        this.formaDePagamento = formaDePagamento;
-        this.endereco = endereco;
-    }
-
     // Métodos de acesso para o ID do pedido
     public int getId() {
         return id;
