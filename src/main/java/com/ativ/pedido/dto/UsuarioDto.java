@@ -27,7 +27,7 @@ public class UsuarioDto {
         }
         if (usuario.getNome() == null || usuario.getUsername() == null || usuario.getEmail() == null
                 || usuario.getCpf() == null) {
-            throw new IllegalArgumentException("Campos críticos do endereço não podem ser nulos");
+            throw new IllegalArgumentException("Campos críticos do Usuario não podem ser nulos");
         }
         this.id = usuario.getId();
         this.nome = usuario.getNome();
