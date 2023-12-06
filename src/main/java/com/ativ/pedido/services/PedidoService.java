@@ -39,25 +39,40 @@ public class PedidoService {
     // Comentário: Salva o pedido no banco de dados.
 
     public void salvar(Pedido pedido, String emailUsuarioLogado) {
-        // Adicione logs para verificar os dados antes de salvar
-
+        // Adiciona logs para verificar os dados antes de salvar
         System.out.println("Dados do Pedido recebidos: " + pedido);
-
-        // Salva o pedido no banco de dados
-        pRepository.save(pedido);
-
-        // Envio de e-mail ao usuário logado
-        String assunto = "Pedido Cadastrado";
-        String mensagem = "O seu pedido foi cadastrado com sucesso!\nDetalhes do Pedido:\n" + pedido.toString();
 
         try {
-            emailService.sendEmail(emailUsuarioLogado, assunto, mensagem);
-        } catch (Exception e) {
-            // Tratar exceções aqui (registre logs, notifique administradores, etc.)
-            e.printStackTrace();
-        } // Adicione logs para verificar os dados antes de salvar
-        System.out.println("Dados do Pedido recebidos: " + pedido);
+            // Salva o pedido no banco de dados
+            pRepository.save(pedido);
 
+            // Envia e-mail ao usuário logado
+            enviarEmailPedidoCadastrado(emailUsuarioLogado, pedido);
+        } catch (Exception e) {
+            // Trata exceções aqui (registra logs, notifica administradores, etc.)
+            e.printStackTrace();
+        }
+
+        // Adiciona logs para verificar os dados após salvar
+        System.out.println("Dados do Pedido salvos: " + pedido);
+    }
+
+    /**
+     * Envia um e-mail ao usuário logado informando que o pedido foi cadastrado com
+     * sucesso.
+     *
+     * @param emailUsuarioLogado O endereço de e-mail do usuário logado.
+     * @param pedido             O pedido que foi cadastrado.
+     */
+    private void enviarEmailPedidoCadastrado(String emailUsuarioLogado, Pedido pedido) {
+        // Cria o assunto do e-mail
+        String assunto = "Pedido Cadastrado";
+
+        // Constrói a mensagem do e-mail com os detalhes do pedido
+        String mensagem = "O seu pedido foi cadastrado com sucesso!\nDetalhes do Pedido:\n" + pedido.toString();
+
+        // Chama o serviço de e-mail para enviar a mensagem
+        emailService.sendEmail(emailUsuarioLogado, assunto, mensagem);
     }
 
     // Busca um Pedido pelo ID e retorna o pedido encontrado, ou null se não
