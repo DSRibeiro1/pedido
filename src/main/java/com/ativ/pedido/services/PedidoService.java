@@ -15,7 +15,7 @@ import com.ativ.pedido.repository.PedidoRepository;
 public class PedidoService {
 
     // Adicionado final ao campo pRepository no construtor para indicar que ele é
-    // injetado e não será alterado após a injeção.
+    // injetado e não será alterado após a injeção..
 
     private final PedidoRepository pRepository;
     private final EmailService emailService;
