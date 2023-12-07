@@ -50,7 +50,7 @@ public class PedidoService {
             enviarEmailPedidoCadastrado(emailUsuarioLogado, pedido);
         } catch (Exception e) {
             // Trata exceções aqui (registra logs, notifica administradores, etc.)
-            e.printStackTrace();
+            throw new RuntimeException("Erro ao salvar o pedido", e);
         }
 
         // Adiciona logs para verificar os dados após salvar
@@ -69,7 +69,8 @@ public class PedidoService {
         String assunto = "Pedido Cadastrado";
 
         // Constrói a mensagem do e-mail com os detalhes do pedido
-        String mensagem = "O seu pedido foi cadastrado com sucesso!\nDetalhes do Pedido:\n" + pedido.toString();
+        String mensagem = String
+                .format("O seu pedido foi cadastrado com sucesso!\nDetalhes do Pedido:\n" + pedido.toString());
 
         // Chama o serviço de e-mail para enviar a mensagem
         emailService.sendEmail(emailUsuarioLogado, assunto, mensagem);
