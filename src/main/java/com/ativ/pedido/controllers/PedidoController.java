@@ -10,11 +10,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ativ.pedido.dto.PedidoDto;
 import com.ativ.pedido.entities.Pedido;
+import com.ativ.pedido.entities.Usuario;
 import com.ativ.pedido.services.PedidoService;
 
 @RestController
@@ -35,8 +35,8 @@ public class PedidoController {
 
     // Comentário: Endpoint para cadastrar um novo pedido.
     @PostMapping("/cadastro")
-    private void cadastro(Pedido pedido, @RequestParam String emailUsuarioLogado) {
-        service.salvar(pedido, emailUsuarioLogado);
+    private void cadastro(Pedido pedido, Usuario usuario) {
+        service.salvar(pedido, usuario);
     }
 
     // Comentário: Endpoint para buscar um pedido pelo ID.

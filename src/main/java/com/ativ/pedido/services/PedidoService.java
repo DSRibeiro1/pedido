@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.ativ.pedido.dto.PedidoDto;
 import com.ativ.pedido.entities.Pedido;
+import com.ativ.pedido.entities.Usuario;
 import com.ativ.pedido.repository.PedidoRepository;
 
 @Service
@@ -38,7 +39,7 @@ public class PedidoService {
 
     // Comentário: Salva o pedido no banco de dados.
 
-    public void salvar(Pedido pedido, String emailUsuarioLogado) {
+    public void salvar(Pedido pedido, Usuario usuario) {
         // Adiciona logs para verificar os dados antes de salvar
         System.out.println("Dados do Pedido recebidos: " + pedido);
 
@@ -46,8 +47,8 @@ public class PedidoService {
             // Salva o pedido no banco de dados
             pRepository.save(pedido);
 
-            // Envia e-mail ao usuário logado
-            enviarEmailPedidoCadastrado(emailUsuarioLogado, pedido);
+            // Envia e-mail ao usuário cadastrado
+            enviarEmailPedidoCadastrado(usuario, pedido);
         } catch (Exception e) {
             // Trata exceções aqui (registra logs, notifica administradores, etc.)
             throw new RuntimeException("Erro ao salvar o pedido", e);
@@ -58,13 +59,14 @@ public class PedidoService {
     }
 
     /**
-     * Envia um e-mail ao usuário logado informando que o pedido foi cadastrado com
+     * Envia um e-mail ao usuário cadastrado informando que o pedido foi cadastrado
+     * com
      * sucesso.
      *
-     * @param emailUsuarioLogado O endereço de e-mail do usuário logado.
+     * @param usuario.getEmail() O endereço de e-mail do usuário cadastrado.
      * @param pedido             O pedido que foi cadastrado.
      */
-    private void enviarEmailPedidoCadastrado(String emailUsuarioLogado, Pedido pedido) {
+    private void enviarEmailPedidoCadastrado(Usuario usuario, Pedido pedido) {
         // Cria o assunto do e-mail
         String assunto = "Pedido Cadastrado";
 
@@ -73,7 +75,7 @@ public class PedidoService {
                 .format("O seu pedido foi cadastrado com sucesso!\nDetalhes do Pedido:\n" + pedido.toString());
 
         // Chama o serviço de e-mail para enviar a mensagem
-        emailService.sendEmail(emailUsuarioLogado, assunto, mensagem);
+        emailService.sendEmail(usuario.getEmail(), assunto, mensagem);
     }
 
     // Busca um Pedido pelo ID e retorna o pedido encontrado, ou null se não
